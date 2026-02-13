@@ -7,31 +7,48 @@
 <style>
 body {
     margin: 0;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
 }
 
-/* Floating Hearts */
-.heart {
-    position: absolute;
-    color: rgba(255,255,255,0.7);
-    font-size: 20px;
-    animation: floatUp 8s linear infinite;
+/* CENTER TEXT */
+.center-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    z-index: 20;
+    text-shadow: 0 5px 25px rgba(0,0,0,0.5);
 }
 
-@keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 1; }
-    100% { transform: translateY(-100px); opacity: 0; }
+/* PHOTO GRID */
+#photos {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 60px;
+    box-sizing: border-box;
+    justify-items: center;
+    align-items: center;
 }
 
-/* Floating Photos */
 .photo {
-    position: absolute;
-    width: 100px;
-    height: 140px;
+    width: 130px;
+    height: 170px;
     cursor: pointer;
-    animation: float 12s linear infinite;
+    transition: transform 0.3s ease;
+}
+
+.photo:hover {
+    transform: scale(1.1);
 }
 
 .photo img {
@@ -39,15 +56,10 @@ body {
     height: 100%;
     border-radius: 15px;
     object-fit: cover;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh); }
-    100% { transform: translateY(-200px); }
-}
-
-/* Card Flip */
+/* CARD */
 .card-container {
     position: fixed;
     top: 50%;
@@ -55,6 +67,7 @@ body {
     transform: translate(-50%, -50%) scale(0);
     perspective: 1000px;
     transition: 0.5s;
+    z-index: 50;
 }
 
 .card-container.show {
@@ -109,29 +122,26 @@ body {
     color: #ff4d6d;
     font-weight: bold;
 }
-.center-text {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    color: white;
-    text-align: center;
-    z-index: 10;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    animation: glow 2s ease-in-out infinite alternate;
+
+/* FLOATING HEARTS */
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    animation: floatUp 8s linear infinite;
 }
 
-@keyframes glow {
-    from { opacity: 0.8; }
-    to { opacity: 1; text-shadow: 0 0 20px white; }
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
 }
-
 </style>
 </head>
 
 <body>
+
 <h1 class="center-text">I Love You Baba ❤️</h1>
+
 <div id="photos"></div>
 
 <div class="card-container" id="cardContainer">
@@ -148,7 +158,6 @@ body {
     </div>
 </div>
 
-<!-- Background Music -->
 <audio id="music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -157,9 +166,9 @@ body {
 const photos = [
     { src: "PHOTO4.png", note: "This day will always live in my heart ❤️" },
     { src: "photo2.jpeg", note: "You make my world brighter every single day ✨ Eid Meri Eid" },
-    { src: "photo3.jpeg", note: "The Early mornings we used to spend together when you just woke up and I just thought KOI UTHTE KE SAATH ITNA SUNDAR KAISE LAG SKTA HAI" },
+    { src: "photo3.jpeg", note: "The early mornings we used to spend together... KOI UTHTE KE SAATH ITNA SUNDAR KAISE LAG SKTA HAI ❤️" },
     { src: "PHOTO5.png", note: "Forever starts with you 💍" },
-    { src: "PHOTO6.jpeg", note: "MERI FAVOURITE MERI PYAARI BABA DEKHO TO KITNI SUNDAR LAG RAHI MERI BABA" }
+    { src: "PHOTO6.jpeg", note: "MERI FAVOURITE MERI PYAARI BABA ❤️" }
 ];
 
 const photosDiv = document.getElementById("photos");
@@ -169,12 +178,9 @@ const cardImg = document.getElementById("cardImg");
 const cardNote = document.getElementById("cardNote");
 const music = document.getElementById("music");
 
-/* Floating Photos */
 photos.forEach(photo => {
     const div = document.createElement("div");
     div.className = "photo";
-    div.style.left = Math.random() * 80 + 10 + "vw";
-    div.style.animationDuration = (10 + Math.random() * 5) + "s";
     div.innerHTML = `<img src="${photo.src}">`;
 
     div.onclick = () => {
@@ -197,7 +203,7 @@ setInterval(() => {
     heart.style.animationDuration = (6 + Math.random() * 4) + "s";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 8000);
-}, 500);
+}, 600);
 
 function closeCard() {
     card.classList.remove("flip");
@@ -207,3 +213,4 @@ function closeCard() {
 
 </body>
 </html>
+
