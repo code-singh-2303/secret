@@ -137,9 +137,9 @@ body {
 
 <script>
 const photos = [
-    { src: "photo1.jpg", note: "This day will always live in my heart ❤️" },
-    { src: "photo2.jpg", note: "You make my world brighter every single day ✨" },
-    { src: "photo3.jpg", note: "Forever starts with you 💍" }
+    { src: "2024-04-23(38).png", note: "This day will always live in my heart ❤️" },
+    { src: "photo2.jpeg", note: "You make my world brighter every single day ✨" },
+    { src: "photo3.jpeg", note: "Forever starts with you 💍" }
 ];
 
 const photosDiv = document.getElementById("photos");
